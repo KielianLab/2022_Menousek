@@ -1,0 +1,22 @@
+seurat_clusters,celltype,n
+0,Neutrophils,1286
+1,Eosinophils,1
+1,Neutrophils,1131
+2,Basophils,1
+2,Macrophages,1
+2,Neutrophils,806
+3,Neutrophils,802
+4,Neutrophils,417
+5,Neutrophils,300
+6,Neutrophils,283
+7,B cells,2
+7,Basophils,2
+7,DC,7
+7,ILC,1
+7,Macrophages,59
+7,Microglia,1
+7,Monocytes,21
+7,Neutrophils,78
+7,NKT,3
+7,T cells,6
+8,Neutrophils,175
