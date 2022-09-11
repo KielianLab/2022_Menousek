@@ -1,0 +1,14 @@
+Cluster_name,Cluster_num
+Granulocytes 1,0
+Granulocytes 2,1
+Granulocytes/Microglia 1,2
+Granulocytes 3,3
+Microglia,4
+Mono/Mac,5
+Granulocytes/Monocytes,6
+Granulocytes/Microglia 2,7
+T/NK Cells,8
+Granulocytes/Microglia 3,9
+Mono/DC,10
+Granulocytes/Macrophages,11
+B Cells,12

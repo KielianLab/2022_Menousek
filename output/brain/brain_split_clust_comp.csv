@@ -1,0 +1,74 @@
+seurat_clusters,Sample_origin,celltype,n
+0,brain.m,Macrophages,98
+0,brain.p,Macrophages,99
+0,brain.m,Monocytes,452
+0,brain.p,Monocytes,63
+0,brain.m,Neutrophils,1
+0,brain.p,Neutrophils,18
+1,brain.m,Microglia,225
+1,brain.p,Microglia,375
+10,brain.m,B cells,81
+10,brain.p,B cells,3
+11,brain.m,Macrophages,1
+11,brain.p,Macrophages,1
+11,brain.m,Monocytes,1
+11,brain.m,Neutrophils,24
+11,brain.p,Neutrophils,47
+12,brain.m,Monocytes,20
+12,brain.p,Monocytes,1
+13,brain.m,Basophils,13
+13,brain.p,Basophils,4
+13,brain.m,Mast cells,1
+2,brain.m,Endothelial cells,1
+2,brain.p,Endothelial cells,1
+2,brain.m,Epithelial cells,3
+2,brain.p,Epithelial cells,3
+2,brain.m,Fibroblasts,1
+2,brain.p,Fibroblasts,3
+2,brain.m,Macrophages,2
+2,brain.p,Macrophages,14
+2,brain.m,Microglia,277
+2,brain.p,Microglia,137
+2,brain.m,Neutrophils,3
+2,brain.p,Stromal cells,1
+3,brain.p,Macrophages,7
+3,brain.p,Microglia,3
+3,brain.m,Neutrophils,278
+3,brain.p,Neutrophils,199
+4,brain.m,Macrophages,1
+4,brain.m,Microglia,202
+4,brain.p,Microglia,265
+4,brain.m,Neutrophils,1
+5,brain.m,Macrophages,1
+5,brain.p,Macrophages,3
+5,brain.p,Microglia,1
+5,brain.p,Monocytes,1
+5,brain.m,Neutrophils,81
+5,brain.p,Neutrophils,303
+6,brain.m,"B cells, pro",3
+6,brain.m,DC,149
+6,brain.p,DC,7
+6,brain.m,Macrophages,38
+6,brain.p,Macrophages,15
+6,brain.m,Monocytes,140
+6,brain.p,Monocytes,14
+6,brain.m,Neutrophils,1
+7,brain.m,ILC,24
+7,brain.p,Macrophages,2
+7,brain.p,Neutrophils,1
+7,brain.m,NK cells,5
+7,brain.m,NKT,45
+7,brain.p,NKT,1
+7,brain.m,Stem cells,1
+7,brain.m,T cells,163
+7,brain.p,T cells,3
+7,brain.m,Tgd,22
+7,brain.p,Tgd,2
+8,brain.m,Macrophages,30
+8,brain.p,Macrophages,30
+8,brain.p,Microglia,3
+8,brain.m,Monocytes,46
+9,brain.m,ILC,10
+9,brain.m,Neutrophils,1
+9,brain.m,NK cells,80
+9,brain.p,NK cells,1
