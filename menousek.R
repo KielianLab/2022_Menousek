@@ -1,40 +1,41 @@
 ## Made by Christopher M. Horn, MS
 ## Kielian Lab data
 ## Created: 2022-01-31
-## Updated: 2022-06-10
+## Updated: 2023-03-28
 
-## Notes: Cells were infected with dsRed expressing S. aureus, sacrificed, and sorted into dsRed positive/negative immune cells prior to scRNA-seq; p == dsRed positive, m == dsRed negative
+## Notes: Cells were infected with dsRed expressing S. aureus, sacrificed, and sorted into dsRed positive/negative immune cells prior to scRNA-seq;
+##        p == dsRed positive, m == dsRed negative
 
 
 
 
 # Setting up environment -----
-
 ## Load in packages
-packages <- c('tidyverse',
-              'Seurat',
-              'patchwork',
-              'SingleR',
-              'SingleCellExperiment',
-              'sctransform',
-              'MAST',
-              'plotly',
-              'ggsci',
-              'readxl',
-              'fgsea',
-              'data.table',
-              'clusterExperiment',
-              'pheatmap',
-              'mgcv',
-              'slingshot',
-              'msigdbr',
-              'celldex',
-              'dittoSeq',
-              'here',
-              'reshape2')
+packages <- c(
+  'tidyverse',
+  'Seurat',
+  'patchwork',
+  'SingleR',
+  'SingleCellExperiment',
+  'sctransform',
+  'MAST',
+  'plotly',
+  'ggsci',
+  'readxl',
+  'fgsea',
+  'data.table',
+  'clusterExperiment',
+  'pheatmap',
+  'mgcv',
+  'slingshot',
+  'msigdbr',
+  'celldex',
+  'dittoSeq',
+  'here',
+  'reshape2'
+)
 
 invisible(lapply(packages, library, character.only = T))
-
 rm(packages)
 
 ## Set options
@@ -44,7 +45,6 @@ set.seed(12345)
 
 
 # Initializing objects -----
-
 ## Setting up Seurat objects
 ## Load in the data
 brain_p.data <- Read10X(data.dir = here('raw data', 'brain_p'))
@@ -110,29 +110,30 @@ ggsave('galea_p.QC_mets.plot.png', plot = galea_p.QC_mets.plot, device = 'png', 
 ggsave('galea_m.QC_mets.plot.png', plot = galea_m.QC_mets.plot, device = 'png', path = here('output', 'QC'))
 
 ## Remove temp objects
-rm(brain_p.data,
-   brain_m.data,
-   galea_p.data,
-   galea_m.data,
-   sample.id_1,
-   sample.id_2,
-   sample.id_3,
-   sample.id_4,
-   brain_p.QC_mets,
-   brain_p.QC_mets.plot,
-   brain_m.QC_mets,
-   brain_m.QC_mets.plot,
-   galea_p.QC_mets,
-   galea_p.QC_mets.plot,
-   galea_m.QC_mets,
-   galea_m.QC_mets.plot)
+rm(
+  brain_p.data,
+  brain_m.data,
+  galea_p.data,
+  galea_m.data,
+  sample.id_1,
+  sample.id_2,
+  sample.id_3,
+  sample.id_4,
+  brain_p.QC_mets,
+  brain_p.QC_mets.plot,
+  brain_m.QC_mets,
+  brain_m.QC_mets.plot,
+  galea_p.QC_mets,
+  galea_p.QC_mets.plot,
+  galea_m.QC_mets,
+  galea_m.QC_mets.plot
+)
 
 gc()
 
 
 
 # Annotating cell types -----
-
 ## Annotate the cells w/SingleR
 brain.p <- NormalizeData(brain.p)
 brain.m <- NormalizeData(brain.m)
@@ -167,30 +168,31 @@ galea.p[['celltype']] <- pred.galea_p$pruned.labels
 galea.m[['celltype']] <- pred.galea_m$pruned.labels
 
 ## Remove temp objects
-rm(ref.se,
-   brain.p_sce,
-   brain.m_sce,
-   galea.p_sce,
-   galea.m_sce,
-   commonGenes.1,
-   commonGenes.2,
-   commonGenes.3,
-   commonGenes.4,
-   ref.se_1,
-   ref.se_2,
-   ref.se_3,
-   ref.se_4,
-   pred.brain_p,
-   pred.brain_m,
-   pred.galea_p,
-   pred.galea_m)
+rm(
+  ref.se,
+  brain.p_sce,
+  brain.m_sce,
+  galea.p_sce,
+  galea.m_sce,
+  commonGenes.1,
+  commonGenes.2,
+  commonGenes.3,
+  commonGenes.4,
+  ref.se_1,
+  ref.se_2,
+  ref.se_3,
+  ref.se_4,
+  pred.brain_p,
+  pred.brain_m,
+  pred.galea_p,
+  pred.galea_m
+)
 
 gc()
 
 
 
 # Object integration -----
-
 ## Integrating all cells from all days
 brain.list <- c(brain.p, brain.m)
 names(brain.list) <- c('brain.p', 'brain.m')
@@ -207,12 +209,14 @@ brain.integrated <- FindClusters(brain.integrated, resolution = 0.5)
 saveRDS(brain.integrated, here('output', 'Joe_brain.integrated.rds'))
 
 ## Remove temp objects
-rm(brain.list,
-   brain.features,
-   brain.anchors,
-   brain.p,
-   brain.m,
-   i)
+rm(
+  brain.list,
+  brain.features,
+  brain.anchors,
+  brain.p,
+  brain.m,
+  i
+)
 
 gc()
 
@@ -231,12 +235,14 @@ galea.integrated <- FindClusters(galea.integrated, resolution = 0.5)
 saveRDS(galea.integrated, here('output', 'Joe_galea.integrated.rds'))
 
 ## Remove temp objects
-rm(galea.list,
-   galea.features,
-   galea.anchors,
-   galea.p,
-   galea.m,
-   i)
+rm(
+  galea.list,
+  galea.features,
+  galea.anchors,
+  galea.p,
+  galea.m,
+  i
+)
 
 gc()
 
@@ -269,55 +275,63 @@ galea_split_clust.comp <- galea.integrated@meta.data %>%
   filter(n > 0) %>%
   arrange(seurat_clusters)
 
-
 write_csv(brain_clust.comp, here('output', 'brain', 'brain_clust_comp.csv'))
 write_csv(brain_split_clust.comp, here('output', 'brain', 'brain_split_clust_comp.csv'))
 write_csv(galea_clust.comp, here('output', 'galea', 'galea_clust_comp.csv'))
 write_csv(galea_split_clust.comp, here('output', 'galea', 'galea_split_clust_comp.csv'))
 
-rm(brain_clust.comp,
-   brain_split_clust.comp,
-   galea_clust.comp,
-   galea_split_clust.comp)
+rm(
+  brain_clust.comp,
+  brain_split_clust.comp,
+  galea_clust.comp,
+  galea_split_clust.comp
+)
 
 gc()
 
 
 
 # Renaming/plotting -----
-
 ## Renaming clusters
-brain_new.cluster.ids <- c('Mono/Mac 1',
-                           'Microglia 1',
-                           'Microglia 2',
-                           'Granulocytes 1',
-                           'Microglia 3',
-                           'Granulocytes 2',
-                           'Mono/Mac/DC',
-                           'ILC/NKT/T/Tgd',
-                           'Mono/Mac 2',
-                           'ILC/NK',
-                           'B Cells',
-                           'Granulocytes 3',
-                           'Monocytes',
-                           'Basophils')
+brain_new.cluster.ids <- c(
+  'Mono/Mac 1',
+  'Microglia 1',
+  'Microglia 2',
+  'Granulocytes 1',
+  'Microglia 3',
+  'Granulocytes 2',
+  'Mono/Mac/DC',
+  'ILC/NKT/T/Tgd',
+  'Mono/Mac 2',
+  'ILC/NK',
+  'B Cells',
+  'Granulocytes 3',
+  'Monocytes',
+  'Basophils'
+)
+
 names(brain_new.cluster.ids) <- levels(brain.integrated)
 brain.integrated <- RenameIdents(brain.integrated, brain_new.cluster.ids)
 
-galea_new.cluster.ids <- c('Granulocytes 1',
-                           'Granulocytes 2',
-                           'Granulocytes 3',
-                           'Granulocytes 4',
-                           'Granulocytes 5',
-                           'Granulocytes 6',
-                           'Granulocytes 7',
-                           'C7',
-                           'Granulocytes 8')
+galea_new.cluster.ids <- c(
+  'Granulocytes 1',
+  'Granulocytes 2',
+  'Granulocytes 3',
+  'Granulocytes 4',
+  'Granulocytes 5',
+  'Granulocytes 6',
+  'Granulocytes 7',
+  'C7',
+  'Granulocytes 8'
+)
+
 names(galea_new.cluster.ids) <- levels(galea.integrated)
 galea.integrated <- RenameIdents(galea.integrated, galea_new.cluster.ids)
 
-rm(brain_new.cluster.ids,
-   galea_new.cluster.ids)
+rm(
+  brain_new.cluster.ids,
+  galea_new.cluster.ids
+)
 
 gc()
 
@@ -381,14 +395,16 @@ ggsave('galea_pca.cluster.png', plot = galea_pca.clus, device = 'png', path = he
 ggsave('galea_umap.origin.png', plot = galea_umap.origin, device = 'png', path = here('output', 'galea'))
 ggsave('galea_umap.cluster.png', plot = galea_umap.clus, device = 'png', path = here('output', 'galea'))
 
-rm(brain_pca.origin,
-   brain_pca.clus,
-   brain_umap.origin,
-   brain_umap.clus,
-   galea_pca.origin,
-   galea_pca.clus,
-   galea_umap.origin,
-   galea_umap.clus)
+rm(
+  brain_pca.origin,
+  brain_pca.clus,
+  brain_umap.origin,
+  brain_umap.clus,
+  galea_pca.origin,
+  galea_pca.clus,
+  galea_umap.origin,
+  galea_umap.clus
+)
 
 gc()
 
@@ -405,8 +421,10 @@ write_csv(galea.num2name, here('output', 'galea', 'galea_num 2 name cheat sheet.
 write.csv(brain.integrated@meta.data, here('output', 'brain', 'brain.int_metadata.csv'))
 write.csv(galea.integrated@meta.data, here('output', 'galea', 'galea.int_metadata.csv'))
 
-rm(brain.num2name,
-   galea.num2name)
+rm(
+  brain.num2name,
+  galea.num2name
+)
 
 gc()
 
@@ -417,28 +435,35 @@ galea.mp <- table(Idents(galea.integrated), galea.integrated$Sample_origin)
 write.csv(brain.mp, here('output', 'brain_mp.csv'))
 write.csv(galea.mp, here('output', 'galea_mp.csv'))
 
-rm(brain.mp,
-   galea.mp)
+rm(
+  brain.mp,
+  galea.mp
+)
 
 gc()
 
 ## Subsetting out
-brain.microglia <- subset(brain.integrated, idents = c('Microglia 1',
-                                                       'Microglia 2',
-                                                       'Microglia 3'))
+brain.microglia <- subset(brain.integrated, idents = c(
+  'Microglia 1',
+  'Microglia 2',
+  'Microglia 3'
+))
 
-brain.granulocyte <- subset(brain.integrated, idents = c('Granulocytes 1',
-                                                         'Granulocytes 2',
-                                                         'Granulocytes 3'))
+brain.granulocyte <- subset(brain.integrated, idents = c(
+  'Granulocytes 1',
+  'Granulocytes 2',
+  'Granulocytes 3'
+))
 
-brain.monomac <- subset(brain.integrated, idents = c('Mono/Mac 1',
-                                                     'Mono/Mac 2'))
+brain.monomac <- subset(brain.integrated, idents = c(
+  'Mono/Mac 1',
+  'Mono/Mac 2'
+))
 
 
 
 
 # Cluster-level DE -----
-
 ## Gene DE Analysis
 DefaultAssay(brain.integrated) <- 'RNA'
 brain.integrated <- NormalizeData(brain.integrated, verbose = T)
@@ -492,31 +517,35 @@ brain.de_11 <- FindMarkers(brain.integrated, ident.2 = 'Granulocytes 3_brain.m',
 brain.de_12 <- FindMarkers(brain.integrated, ident.2 = 'Monocytes_brain.m', ident.1 = 'Monocytes_brain.p', test.use = 'MAST', min.pct = 0, logfc.threshold = 0)
 brain.de_13 <- FindMarkers(brain.integrated, ident.2 = 'Basophils_brain.m', ident.1 = 'Basophils_brain.p', test.use = 'MAST', min.pct = 0, logfc.threshold = 0)
 
-brain_de.list <- list(brain.de_00,
-                      brain.de_01,
-                      brain.de_02,
-                      brain.de_03,
-                      brain.de_04,
-                      brain.de_05,
-                      brain.de_06,
-                      brain.de_07,
-                      brain.de_08,
-                      brain.de_10,
-                      brain.de_11,
-                      brain.de_13)
+brain_de.list <- list(
+  brain.de_00,
+  brain.de_01,
+  brain.de_02,
+  brain.de_03,
+  brain.de_04,
+  brain.de_05,
+  brain.de_06,
+  brain.de_07,
+  brain.de_08,
+  brain.de_10,
+  brain.de_11,
+  brain.de_13
+)
 
-rm(brain.de_00,
-   brain.de_01,
-   brain.de_02,
-   brain.de_03,
-   brain.de_04,
-   brain.de_05,
-   brain.de_06,
-   brain.de_07,
-   brain.de_08,
-   brain.de_10,
-   brain.de_11,
-   brain.de_13)
+rm(
+  brain.de_00,
+  brain.de_01,
+  brain.de_02,
+  brain.de_03,
+  brain.de_04,
+  brain.de_05,
+  brain.de_06,
+  brain.de_07,
+  brain.de_08,
+  brain.de_10,
+  brain.de_11,
+  brain.de_13
+)
 
 gc()
 
@@ -531,25 +560,29 @@ galea.de_06 <- FindMarkers(galea.integrated, ident.2 = 'Granulocytes 7_galea.m',
 galea.de_07 <- FindMarkers(galea.integrated, ident.2 = 'C7_galea.m', ident.1 = 'C7_galea.p', test.use = 'MAST', min.pct = 0, logfc.threshold = 0)
 galea.de_08 <- FindMarkers(galea.integrated, ident.2 = 'Granulocytes 8_galea.m', ident.1 = 'Granulocytes 8_galea.p', test.use = 'MAST', min.pct = 0, logfc.threshold = 0)
 
-galea_de.list <- list(galea.de_00,
-                      galea.de_01,
-                      galea.de_02,
-                      galea.de_03,
-                      galea.de_04,
-                      galea.de_05,
-                      galea.de_06,
-                      galea.de_07,
-                      galea.de_08)
+galea_de.list <- list(
+  galea.de_00,
+  galea.de_01,
+  galea.de_02,
+  galea.de_03,
+  galea.de_04,
+  galea.de_05,
+  galea.de_06,
+  galea.de_07,
+  galea.de_08
+)
 
-rm(galea.de_00,
-   galea.de_01,
-   galea.de_02,
-   galea.de_03,
-   galea.de_04,
-   galea.de_05,
-   galea.de_06,
-   galea.de_07,
-   galea.de_08)
+rm(
+  galea.de_00,
+  galea.de_01,
+  galea.de_02,
+  galea.de_03,
+  galea.de_04,
+  galea.de_05,
+  galea.de_06,
+  galea.de_07,
+  galea.de_08
+)
 
 gc()
 
@@ -639,21 +672,23 @@ for (i in 1:length(geneSet_list)) {
 }
 
 
-rm(geneSet_list,
-   m_list, 
-   stats,
-   glist, 
-   eaRes,
-   brain_de.list,
-   galea_de.list,
-   DE,
-   brain.markers,
-   galea.markers,
-   GO.set,
-   HM.set,
-   CP.set,
-   i,
-   ii)
+rm(
+  geneSet_list,
+  m_list, 
+  stats,
+  glist, 
+  eaRes,
+  brain_de.list,
+  galea_de.list,
+  DE,
+  brain.markers,
+  galea.markers,
+  GO.set,
+  HM.set,
+  CP.set,
+  i,
+  ii
+)
 
 gc()
 
@@ -743,31 +778,32 @@ for (i in 1:length(geneSet_list)) {
   }
 }
 
-rm(brain.microglia,
-   brain.granulocyte,
-   brain.monomac,
-   brain_microglia.markers,
-   brain_granulocyte.markers,
-   brain_monomac.markers,
-   brain_microglia.filtered,
-   brain_granulocyte.filtered,
-   brain_monomac.filtered,
-   GO.set,
-   CP.set,
-   HM.set,
-   geneSet_list,
-   m_list,
-   glist,
-   stats,
-   eaRes,
-   i,
-   ii)
+rm(
+  brain.microglia,
+  brain.granulocyte,
+  brain.monomac,
+  brain_microglia.markers,
+  brain_granulocyte.markers,
+  brain_monomac.markers,
+  brain_microglia.filtered,
+  brain_granulocyte.filtered,
+  brain_monomac.filtered,
+  GO.set,
+  CP.set,
+  HM.set,
+  geneSet_list,
+  m_list,
+  glist,
+  stats,
+  eaRes,
+  i,
+  ii
+)
 
 gc()
 
 
 # Brain & galea integration ------
-
 cranio.list <- c(brain.integrated, galea.integrated)
 names(cranio.list) <- c('brain', 'galea')
 for (i in 1:length(cranio.list))
@@ -783,12 +819,14 @@ cranio.integrated <- FindClusters(cranio.integrated, resolution = 0.5)
 saveRDS(cranio.integrated, here('output', 'Joe_cranio.integrated.rds'))
 
 ## Remove temp objects
-rm(cranio.list,
-   cranio.features,
-   cranio.anchors,
-   brain.integrated,
-   galea.integrated,
-   i)
+rm(
+  cranio.list,
+  cranio.features,
+  cranio.anchors,
+  brain.integrated,
+  galea.integrated,
+  i
+)
 
 gc()
 
@@ -800,19 +838,22 @@ rm(clust.comp)
 
 gc()
 
-cranio_new.cluster.ids <- c('Granulocytes 1',
-                            'Granulocytes 2',
-                            'Granulocytes/Microglia 1',
-                            'Granulocytes 3',
-                            'Microglia',
-                            'Mono/Mac',
-                            'Granulocytes/Monocytes',
-                            'Granulocytes/Microglia 2',
-                            'T/NK Cells',
-                            'Granulocytes/Microglia 3',
-                            'Mono/DC',
-                            'Granulocytes/Macrophages',
-                            'B Cells')
+cranio_new.cluster.ids <- c(
+  'Granulocytes 1',
+  'Granulocytes 2',
+  'Granulocytes/Microglia 1',
+  'Granulocytes 3',
+  'Microglia',
+  'Mono/Mac',
+  'Granulocytes/Monocytes',
+  'Granulocytes/Microglia 2',
+  'T/NK Cells',
+  'Granulocytes/Microglia 3',
+  'Mono/DC',
+  'Granulocytes/Macrophages',
+  'B Cells'
+)
+
 names(cranio_new.cluster.ids) <- levels(cranio.integrated)
 cranio.integrated <- RenameIdents(cranio.integrated, cranio_new.cluster.ids)
 
@@ -859,11 +900,13 @@ ggsave('cranio_umap.origin.png', plot = cranio_umap.origin, device = 'png', path
 ggsave('cranio_umap.origin2.png', plot = cranio_umap.origin2, device = 'png', path = here('output', 'agg'))
 ggsave('cranio_umap.cluster.png', plot = cranio_umap.clus, device = 'png', path = here('output', 'agg'))
 
-rm(cranio_pca.origin,
-   cranio_pca.clus,
-   cranio_umap.origin,
-   cranio_umap.origin2,
-   cranio_umap.clus)
+rm(
+  cranio_pca.origin,
+  cranio_pca.clus,
+  cranio_umap.origin,
+  cranio_umap.origin2,
+  cranio_umap.clus
+)
 
 gc()
 
@@ -890,38 +933,7 @@ gc()
 
 
 
-# Single-cell GSEA ------
-
-GS <- getGeneSets(library = 'H', species = 'Mus musculus')
-# GS <- getGeneSets(library = 'C5', species = 'Mus musculus')
-ES <- enrichIt(neutro.integrated, gene.sets = GS, groups = 1000, cores = 2)
-neutro.integrated <- AddMetaData(neutro.integrated, ES)
-
-colors <- colorRampPalette(c("#FF4B20", "#FFB433", "#C6FDEC", "#7AC5FF", "#0348A6"))
-
-multi_dittoPlot(neutro.integrated, vars = c('HALLMARK_APOPTOSIS', 'HALLMARK_FATTY_ACID_METABOLISM', 'HALLMARK_GLYCOLYSIS', 'HALLMARK_HEME_METABOLISM', 'HALLMARK_HYPOXIA', 'HALLMARK_INFLAMMATORY_RESPONSE', 'HALLMARK_MTORC1_SIGNALING', 'HALLMARK_OXIDATIVE_PHOSPHORYLATION', 'HALLMARK_PEROXISOME', 'HALLMARK_PI3K_AKT_MTOR_SIGNALING', 'HALLMARK_REACTIVE_OXYGEN_SPECIES_PATHWAY'), 
-                group.by = 'seurat_clusters', plots = c('jitter', 'vlnplot', 'boxplot'), 
-                ylab = 'Enrichment Scores', 
-                theme = theme_classic() + theme(plot.title = element_text(size = 10)))
-
-
-
-ES2 <- data.frame(neutro.integrated[[]], Idents(neutro.integrated))
-colnames(ES2)[ncol(ES2)] <- 'cluster'
-ridgeEnrichment(ES2, gene.set = 'HALLMARK_HYPOXIA', group = 'seurat_clusters', add.rug = TRUE) # Add 'facet = 'Sample.ID'' to split by day
-
-
-
-PCA <- performPCA(enriched = ES2, groups = c('seurat_clusters', 'Sample.ID'))
-pcaEnrichment(PCA, PCx = 'PC1', PCy = 'PC2', contours = TRUE)
-pcaEnrichment(PCA, PCx = 'PC1', PCy = 'PC2', contours = FALSE, facet = 'seurat_clusters')
-
-output <- getSignificance(ES2, group = 'seurat_clusters', fit = 'ANOVA') # Can use linear.model, T.test, or ANOVA
-
-
-
 # Complex Heatmap ------
-
 ## Average single cell data & pull out normalized counts
 ## Counts are normalized by dividing the counts for a given feature by the total counts per cell, multiplying by a scale factor (default == 10,000), and then taking the natural log using log1p()
 brain.avg <- AverageExpression(brain.integrated, return.seurat = T)
